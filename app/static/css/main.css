@@ -1,0 +1,93 @@
+.log-in-register-section{
+    background: linear-gradient(45deg, lightgray, white);
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.log-in-container{
+    background: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 35%;
+    aspect-ratio: 1;
+    border-radius: 30px;
+    row-gap: 2.5vh;
+}
+.register-container{
+    background: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 35%;
+    aspect-ratio: 0.9;
+    border-radius: 30px;
+    row-gap: 2.5vh;
+}
+.log-in-register-logo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2vh;
+    margin-top: 2vh;
+}
+.logo-img{
+    width: 50vh;
+    max-width: 80%;
+    max-height: 100%;
+    aspect-ratio: auto;
+    border-radius: 30px;
+}
+.log-in-register-inputs{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-self: center;
+    width: 75%;
+    height: auto;
+    row-gap: 2.5vh;
+    margin: 1vh;
+}
+.log-in-button{
+    width: 75%;
+    height: auto;
+    aspect-ratio: 8;
+    color: black;
+    background-color: #B8E5FF;
+    transition: 0.25s;
+    border-radius: 30px;
+    border-width: 0.1rem;
+    font-size: 2.5vh;
+    margin: 1vh;
+}
+.log-in-button:hover{
+    background-color: #8cd5ff;
+    transition:0.25s;
+}
+.new-acc-button{
+    width: 75%;
+    height: auto;
+    aspect-ratio: 8;
+    color: black;
+    background-color: #E2E2E2;
+    transition: 0.25s;
+    border-radius: 30px;
+    border-width: 0.11rem;
+    font-size: 2vh;
+    margin: 1vh;
+}
+.new-acc-button:hover{
+    background-color: #bfbfbf;
+    transition:0.25s;
+}   
+.log-in-register-line{
+    width: 75%;
+    margin: 0;
+}
+.form-control{
+    font-family: Arial, Helvetica, sans-serif !important;
+    font-size: 2.5vh !important;
+}
