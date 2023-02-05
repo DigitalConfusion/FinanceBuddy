@@ -1,0 +1,22 @@
+{% extends "baseLogInRegister.html" %}
+
+{% block head %}
+    {{ super() }}
+    <h1>{% block title %}Register | FinanceBuddy{% endblock title %}</h1>
+{% endblock head %}
+
+{% block content %}
+
+<form method="POST" class="log-in-register-inputs">
+    <div class="input-group input-group-lg">
+        {{ form.csrf_token }}
+        {{ form.username(class="form-control", placeholder="Username")}}
+        {{ form.email(class="form-control", placeholder="Email")}}
+        {{ form.password(class="form-control", placeholder="Password")}}
+    </div>
+    {{ form.submit(class="log-in-button")}}
+<form/>
+<hr class="log-in-register-line">
+<button type="button" class="new-acc-button">Already have an account? Log In</button>
+
+{% endblock %}

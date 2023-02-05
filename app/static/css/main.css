@@ -58,7 +58,7 @@
     color: black;
     background-color: #B8E5FF;
     transition: 0.25s;
-    border-radius: 30px;
+    border-radius: 15px;
     border-width: 0.1rem;
     font-size: 2.5vh;
     margin: 1vh;
@@ -74,7 +74,7 @@
     color: black;
     background-color: #E2E2E2;
     transition: 0.25s;
-    border-radius: 30px;
+    border-radius: 15px;
     border-width: 0.11rem;
     font-size: 2vh;
     margin: 1vh;
@@ -90,4 +90,11 @@
 .form-control{
     font-family: Arial, Helvetica, sans-serif !important;
     font-size: 2.5vh !important;
+    width: 100% !important;
+    margin-top: 1vh !important;
+    border-radius: 20px !important;
+}
+.input-group{
+    display: flex !important;
+    flex-direction: column !important;
 }
