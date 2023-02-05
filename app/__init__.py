@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask
+from flask import Flask, redirect, url_for
 from flask_bootstrap import Bootstrap
 
 
@@ -30,6 +30,10 @@ def createApp(test_config=None):
     app.register_blueprint(auth.bp)
     app.register_blueprint(dashboard.bp)
 
+    @app.route("/")
+    def index():
+        return redirect(url_for("auth.login"))
+    
     return app
 
 
