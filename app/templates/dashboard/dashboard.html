@@ -1,0 +1,57 @@
+{% extends "dashboard/baseDashboard.html" %}
+
+{% block head %}
+    {{ super() }}
+    <h1>{% block title %}Dashboard | FinanceBuddy{% endblock title %}</h1>
+{% endblock head %}
+
+{% block active_screen %}
+<h1>Dashboard</h1>
+{% endblock %}
+
+{% block content %}
+<div class="finance-data-container">
+    <div class="amount-data-container">
+        <div class="finance-data-display">
+            <p class="finance-data-title">Available Balance</p>
+            <p class="finance-data-amount">123.45 €</p>
+        </div>
+        <button type="button" class="finance-data-button">
+            Change Balance
+        </button>
+    </div>
+    <div class="amount-data-container">
+        <div class="finance-data-display">
+            <p class="finance-data-title">Income</p>
+            <p class="finance-data-amount">123.45 €</p>
+        </div>
+        <button type="button" class="finance-data-button">
+            Add Income
+        </button>
+    </div>
+    <div class="amount-data-container">
+        <div class="finance-data-display">
+            <p class="finance-data-title">Expenses</p>
+            <p class="finance-data-amount">123.45 €</p>
+        </div>
+        <button type="button" class="finance-data-button">
+            Add Expense
+        </button>
+    </div>
+</div>
+<div class="finance-widgets-container">
+    <div class="widget-container">
+        <div class="balance-history-widget">
+            
+        </div>
+        <div class="finance-history-widget">
+
+        </div>
+    </div>
+    <div class="widget-container">
+        <div class="finance-planner-widget">
+
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -8,9 +8,9 @@ bp = Blueprint("dashboard", __name__, url_prefix="/dashboard")
 
 @bp.route("/", methods=["GET"])
 def dashboard():
-    return render_template("dashboard.html")
+    return render_template("dashboard/dashboard.html")
 
 
 @bp.route("/stats", methods=["GET"])
 def stats():
-    return render_template("dashboard.html")
+    return render_template("dashboard/dashboard.html")

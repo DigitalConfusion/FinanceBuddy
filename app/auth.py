@@ -16,7 +16,7 @@ def register():
         password = form.password.data
         return redirect(url_for("auth.login"))
 
-    return render_template("register.html", form=form)
+    return render_template("auth/register.html", form=form)
 
 @bp.route("/", methods=["POST", "GET"])
 @bp.route("/login", methods=["POST", "GET"])
@@ -27,7 +27,7 @@ def login():
         password = form.password.data
         return redirect(url_for("dashboard.dashboard"))
 
-    return render_template("login.html", form=form)
+    return render_template("auth/login.html", form=form)
 
 
 @bp.before_app_request
