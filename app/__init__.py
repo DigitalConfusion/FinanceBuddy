@@ -29,6 +29,9 @@ def createApp(test_config=None):
     from . import auth, dashboard
     app.register_blueprint(auth.bp)
     app.register_blueprint(dashboard.bp)
+    
+    from . import db
+    db.init_app(app)
 
     @app.route("/")
     def index():

@@ -14,7 +14,7 @@
     <div class="amount-data-container">
         <div class="finance-data-display">
             <p class="finance-data-title">Available Balance</p>
-            <p class="finance-data-amount">123.45 €</p>
+            <p class="finance-data-amount">{{ user_data["total_balance"] }} €</p>
         </div>
         <button type="button" class="finance-data-button" data-bs-toggle="modal" data-bs-target="#balanceModal">
             Change Balance
@@ -46,7 +46,7 @@
     <div class="amount-data-container">
         <div class="finance-data-display">
             <p class="finance-data-title">Income</p>
-            <p class="finance-data-amount">123.45 €</p>
+            <p class="finance-data-amount">{{ user_data["total_income"] }} €</p>
         </div>
         <button type="button" class="finance-data-button" data-bs-toggle="modal" data-bs-target="#incomeModal">
             Add Income
@@ -78,7 +78,7 @@
     <div class="amount-data-container">
         <div class="finance-data-display">
             <p class="finance-data-title">Expenses</p>
-            <p class="finance-data-amount">123.45 €</p>
+            <p class="finance-data-amount">{{ user_data["total_expense"] }} €</p>
         </div>
         <button type="button" class="finance-data-button" data-bs-toggle="modal" data-bs-target="#expenseModal">
             Add Expense
