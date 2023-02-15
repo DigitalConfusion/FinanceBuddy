@@ -16,6 +16,6 @@
     {{ form.submit(class="log-in-button")}}
 <form/>
 <hr class="log-in-register-line">
-<button type="button" class="new-acc-button">Create new account</button>
+<button type="button" class="new-acc-button" onclick="window.location.href='{{ url_for( 'auth.register' ) }}';">Create new account</button>
 
 {% endblock %}

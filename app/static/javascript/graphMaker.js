@@ -19,4 +19,6 @@ function drawChart() {
     // Draw Chart
     var chart = new google.visualization.LineChart(document.getElementById('balance_history_graph'));
     chart.draw(data, options);
+    var chart = new google.visualization.LineChart(document.getElementById('balance_history_graph2'));
+    chart.draw(data, options);
     }

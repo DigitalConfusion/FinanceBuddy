@@ -12,7 +12,6 @@ def register():
     form = RegisterForm(request.form)
     if request.method == "POST" and form.validate_on_submit():
         username = form.username.data
-        email = form.email.data
         password = form.password.data
         return redirect(url_for("auth.login"))
 

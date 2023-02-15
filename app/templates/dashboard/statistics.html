@@ -1,0 +1,35 @@
+{% extends "dashboard/baseDashboard.html" %}
+
+{% block head %}
+    {{ super() }}
+    <h1>{% block title %}Statistics | FinanceBuddy{% endblock title %}</h1>
+{% endblock head %}
+
+{% block active_screen %}
+<h1>Statistics</h1>
+{% endblock %}
+
+{% block content %}
+<div class="stats-container">
+    <div class="stats-row">
+        <div class="stats-graph">
+            <h4>Income</h4>
+            <div id="balance_history_graph" class="balance-history-graph"></div>
+        </div>
+        <div class="stats-graph">
+            <h4>Expenses</h4>
+            <div id="balance_history_graph2" class="balance-history-graph"></div>
+        </div>
+    </div>
+    <div class="stats-row">
+        <div class="stats-graph">
+            <h4>Income</h4>
+            <div id="balance_history_graph3" class="balance-history-graph"></div>
+        </div>
+        <div class="stats-graph">
+            <h4>Expenses</h4>
+            <div id="balance_history_graph4" class="balance-history-graph"></div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -16,27 +16,96 @@
             <p class="finance-data-title">Available Balance</p>
             <p class="finance-data-amount">123.45 €</p>
         </div>
-        <button type="button" class="finance-data-button">
+        <button type="button" class="finance-data-button" data-bs-toggle="modal" data-bs-target="#balanceModal">
             Change Balance
         </button>
+        <div class="modal fade" id="balanceModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5>Change Balance</h5>
+                </div>
+                <form method="POST" class="balance-input">
+                    <div class="modal-body">
+                        <div class="modal-body-content">
+                                <div class="input-group input-group-lg">
+                                    {{ balanceForm.csrf_token }}
+                                    {{ balanceForm.balance(class="form-control", placeholder="Enter new balance")}}
+                                </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    {{ balanceForm.submit(class="btn btn-primary")}}
+                    </div>
+                </form>
+            </div>
+            </div>
+        </div>
     </div>
     <div class="amount-data-container">
         <div class="finance-data-display">
             <p class="finance-data-title">Income</p>
             <p class="finance-data-amount">123.45 €</p>
         </div>
-        <button type="button" class="finance-data-button">
+        <button type="button" class="finance-data-button" data-bs-toggle="modal" data-bs-target="#incomeModal">
             Add Income
         </button>
-    </div>
+        <div class="modal fade" id="incomeModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5>Add Income</h5>
+                    </div>
+                    <form method="POST" class="balance-input">
+                        <div class="modal-body">
+                            <div class="modal-body-content">
+                                    <div class="input-group input-group-lg">
+                                        {{ incomeForm.csrf_token }}
+                                        {{ incomeForm.income(class="form-control", placeholder="Enter income amount")}}
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        {{ incomeForm.submit(class="btn btn-primary")}}
+                        </div>
+                    </form>
+                </div>
+                </div>
+        </div>
+    </div>   
     <div class="amount-data-container">
         <div class="finance-data-display">
             <p class="finance-data-title">Expenses</p>
             <p class="finance-data-amount">123.45 €</p>
         </div>
-        <button type="button" class="finance-data-button">
+        <button type="button" class="finance-data-button" data-bs-toggle="modal" data-bs-target="#expenseModal">
             Add Expense
         </button>
+        <div class="modal fade" id="expenseModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5>Add Expense</h5>
+                    </div>
+                    <form method="POST" class="balance-input">
+                        <div class="modal-body">
+                            <div class="modal-body-content">
+                                    <div class="input-group input-group-lg">
+                                        {{ expenseForm.csrf_token }}
+                                        {{ expenseForm.expense(class="form-control", placeholder="Enter expense amount")}}
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        {{ expenseForm.submit(class="btn btn-primary")}}
+                        </div>
+                    </form>
+                </div>
+                </div>
+        </div>
     </div>
 </div>
 <div class="finance-widgets-container">
@@ -48,15 +117,42 @@
                 <button class="range-selector-button">3 Months</button>
                 <button class="range-selector-button">1 Year</button>
             </div>
-            <div id="balance_history_graph" class="balance-history-graph"></div>
+            <div>
+                <h4>Income</h4>
+                <div id="balance_history_graph" class="balance-history-graph"></div>
+                <h4>Expenses</h4>
+                <div id="balance_history_graph2" class="balance-history-graph"></div>
+            </div>
         </div>
-        <div class="finance-history-widget">
-
-        </div>
+        
     </div>
     <div class="widget-container">
-        <div class="finance-planner-widget">
-            
+        <div class="finance-history-widget">
+            <h3>History</h3>
+            <div class="history-widget-bar">
+                <span id="history-category">Category</span>
+                <span id="history-amount">+ 123.45€</span>
+            </div>
+            <div class="history-widget-bar">
+                <span id="history-category">Category</span>
+                <span id="history-amount">+ 123.45€</span>
+            </div>
+            <div class="history-widget-bar">
+                <span id="history-category">Category</span>
+                <span id="history-amount">+ 123.45€</span>
+            </div>
+            <div class="history-widget-bar">
+                <span id="history-category">Category</span>
+                <span id="history-amount">+ 123.45€</span>
+            </div>
+            <div class="history-widget-bar">
+                <span id="history-category">Category</span>
+                <span id="history-amount">+ 123.45€</span>
+            </div>
+            <div class="history-widget-bar">
+                <span id="history-category">Category</span>
+                <span id="history-amount">+ 123.45€</span>
+            </div>
         </div>
     </div>
 </div>
