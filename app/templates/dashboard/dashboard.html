@@ -16,7 +16,7 @@
             <p class="finance-data-title">Available Balance</p>
             <p class="finance-data-amount">{{ user_data["total_balance"] }} €</p>
         </div>
-        <button type="button" class="finance-data-button" data-bs-toggle="modal" data-bs-target="#balanceModal">
+        <button id="testbutton" type="button" class="finance-data-button" data-bs-toggle="modal" data-bs-target="#balanceModal">
             Change Balance
         </button>
         <div class="modal fade" id="balanceModal" tabindex="-1" role="dialog">
@@ -127,32 +127,10 @@
         
     </div>
     <div class="widget-container">
-        <div class="finance-history-widget">
+        <div class="finance-history-widget" id="history_widget">
             <h3>History</h3>
-            <div class="history-widget-bar">
-                <span id="history-category">Category</span>
-                <span id="history-amount">+ 123.45€</span>
-            </div>
-            <div class="history-widget-bar">
-                <span id="history-category">Category</span>
-                <span id="history-amount">+ 123.45€</span>
-            </div>
-            <div class="history-widget-bar">
-                <span id="history-category">Category</span>
-                <span id="history-amount">+ 123.45€</span>
-            </div>
-            <div class="history-widget-bar">
-                <span id="history-category">Category</span>
-                <span id="history-amount">+ 123.45€</span>
-            </div>
-            <div class="history-widget-bar">
-                <span id="history-category">Category</span>
-                <span id="history-amount">+ 123.45€</span>
-            </div>
-            <div class="history-widget-bar">
-                <span id="history-category">Category</span>
-                <span id="history-amount">+ 123.45€</span>
-            </div>
+            <ol id=history_list class="list-group overflow-auto h-100" style="max-height: 55vh;">
+            </ol>
         </div>
     </div>
 </div>

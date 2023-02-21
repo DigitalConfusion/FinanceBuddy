@@ -11,7 +11,7 @@ def createApp(test_config=None):
     app.static_folder = "static"
     app.config.from_mapping(
         SECRET_KEY='jSoNxYNvHIRBsBTp7tBeTMsVd6XWIE8Y',
-        DATABASE=os.path.join(app.instance_path, 'flaskr.sqlite'),
+        DATABASE=os.path.join(app.instance_path, 'financebuddy.sqlite'),
     )
 
     if test_config is None:
