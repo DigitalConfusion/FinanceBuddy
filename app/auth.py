@@ -1,11 +1,15 @@
 import functools
 from flask import Blueprint, flash, g, redirect, render_template, request, session, url_for
 from werkzeug.security import check_password_hash, generate_password_hash
+import json
 
 from app.forms import *
 from app.db import get_db
 
 bp = Blueprint("auth", __name__, url_prefix="/auth")
+
+income_categories = ["Work", "Other", "Personal Income", "Sold Item"]
+expense_categories = ["Groceries", "Other", "Home", "Beauty", "Restaurant"]
 
 
 @bp.route("/register", methods=["POST", "GET"])
@@ -19,8 +23,8 @@ def register():
         
         if error is None:
             try:
-                db.execute("INSERT INTO user (username, password_hash, total_balance, total_income, total_expense) VALUES (?, ?, ?, ?, ?)",
-                           (username, generate_password_hash(password), 0, 0, 0),)
+                db.execute("INSERT INTO user (username, password_hash, total_balance, total_income, total_expense, income_category, expense_category) VALUES (?, ?, ?, ?, ?, ?, ?)",
+                           (username, generate_password_hash(password), 0, 0, 0, json.dumps(income_categories), json.dumps(expense_categories)),)
                 db.commit()
             except db.IntegrityError:
                 error = f"User {username} is already registered!"

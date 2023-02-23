@@ -30,6 +30,7 @@
                         <div class="modal-body-content">
                                 <div class="input-group input-group-lg">
                                     {{ balanceForm.csrf_token }}
+                                    {{ balanceForm.balance.label }}
                                     {{ balanceForm.balance(class="form-control", placeholder="Enter new balance")}}
                                 </div>
                         </div>
@@ -62,7 +63,13 @@
                             <div class="modal-body-content">
                                     <div class="input-group input-group-lg">
                                         {{ incomeForm.csrf_token }}
+                                        {{ incomeForm.income.label }}
                                         {{ incomeForm.income(class="form-control", placeholder="Enter income amount")}}
+                                        {{ incomeForm.income_category.label }}
+                                        {{ incomeForm.income_category(class="form-control", placeholder="Select category")}}
+                                        {{ incomeForm.custom_category(class="form-control", placeholder="Enter name for custom category")}} 
+                                        {{ incomeForm.description.label }}                                       
+                                        {{ incomeForm.description(class="form-control", placeholder="Add a description")}}
                                     </div>
                             </div>
                         </div>
@@ -94,7 +101,13 @@
                             <div class="modal-body-content">
                                     <div class="input-group input-group-lg">
                                         {{ expenseForm.csrf_token }}
+                                        {{ expenseForm.expense.label }}
                                         {{ expenseForm.expense(class="form-control", placeholder="Enter expense amount")}}
+                                        {{ expenseForm.expense_category.label }}
+                                        {{ expenseForm.expense_category(class="form-control", placeholder="Select category")}}
+                                        {{ expenseForm.custom_category2(class="form-control", placeholder="Enter name for custom category")}} 
+                                        {{ expenseForm.description.label }}                                       
+                                        {{ expenseForm.description(class="form-control", placeholder="Add a description")}}
                                     </div>
                             </div>
                         </div>

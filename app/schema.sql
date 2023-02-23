@@ -8,7 +8,9 @@ CREATE TABLE user (
   password_hash TEXT NOT NULL,
   total_balance FLOAT NOT NULL,
   total_income FLOAT NOT NULL,
-  total_expense FLOAT NOT NULL
+  total_expense FLOAT NOT NULL,
+  income_category TEXT NOT NULL,
+  expense_category TEXT NOT NULL
 );
 
 CREATE TABLE income (

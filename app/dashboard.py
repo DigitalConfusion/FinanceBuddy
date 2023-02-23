@@ -2,6 +2,7 @@ import functools
 from flask import Blueprint, flash, g, redirect, render_template, request, session, url_for, jsonify
 from werkzeug.exceptions import abort
 import time
+import json
 
 from app.forms import *
 from app.auth import login_required
@@ -27,8 +28,12 @@ def dashboard():
 
     if request.method == "POST" and incomeForm.validate_on_submit():
         income = float(incomeForm.income.data)
-        category = "TEST"
-        description = "TEST"
+        category = incomeForm.income_category.data
+        if category == "Custom Category":
+            category = incomeForm.custom_category.data
+            db.execute("UPDATE user SET income_category = ? WHERE user_id = ?",
+                       (add_new_to_income_category(g, db, category), g.user["user_id"]))
+        description = incomeForm.description.data
         current_data = db.execute(
             "SELECT total_balance, total_income FROM user WHERE user_id = ?", (g.user["user_id"],)).fetchone()
         db.execute("UPDATE user SET total_balance = ? WHERE user_id = ?", (round(
@@ -44,13 +49,19 @@ def dashboard():
         expense = float(expenseForm.expense.data)
         current_data = db.execute(
             "SELECT total_balance, total_expense FROM user WHERE user_id = ?", (g.user["user_id"],)).fetchone()
+        category = expenseForm.expense_category.data
+        if category == "Custom Category":
+            category = expenseForm.custom_category2.data
+            db.execute("UPDATE user SET expense_category = ? WHERE user_id = ?",
+                       (add_new_to_expense_category(g, db, category), g.user["user_id"]))
+        description = incomeForm.description.data
         if expense > current_data["total_balance"]:
             flash("You do not have enough available balance!")
         else:
             db.execute("UPDATE user SET total_balance = ? WHERE user_id = ?", (round(
                 float(current_data["total_balance"]) - expense, 2), g.user["user_id"]))
             db.execute("INSERT INTO expense (user_id, date, amount, category, description) VALUES (?, ?, ?, ?, ?)",
-                       (g.user["user_id"], int(time.time()), -expense, "TEST", "TEST"))
+                       (g.user["user_id"], int(time.time()), -expense, category, description))
             db.execute("UPDATE user SET total_expense = ? WHERE user_id = ?",
                        (expense_current_month(g, db), g.user["user_id"]))
             db.commit()
@@ -94,3 +105,17 @@ def api_get_finance_data(datatype, count):
     for i, row in enumerate(db_data[:count]):
         data[str(i)] = [row[0], row[1], row[2]]
     return jsonify(data)
+
+
+@bp.route("/api/category/<type>", methods=["GET", "POST"])
+def api_get_category(type):
+    type = str(type.lower())
+    db = get_db()
+    category = None
+    if type == "income":
+        category = db.execute("SELECT income_category FROM user WHERE user_id = ?",
+                              (g.user["user_id"],)).fetchone()["income_category"]
+    else:
+        category = db.execute("SELECT expense_category FROM user WHERE user_id = ?",
+                              (g.user["user_id"],)).fetchone()["expense_category"]
+    return jsonify(category)

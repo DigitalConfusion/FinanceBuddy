@@ -1,5 +1,5 @@
 from datetime import date, datetime
-
+import json
 
 def income_current_month(g, db):
     current_date = date.today()
@@ -21,3 +21,15 @@ def expense_current_month(g, db):
     for row in expense_data:
         expense += row["amount"]
     return round(expense, 2)
+
+def add_new_to_income_category(g, db, category):
+    current_db = db.execute("SELECT income_category FROM user WHERE user_id = ?", (g.user["user_id"],)).fetchone()["income_category"]
+    current_db = json.loads(current_db)
+    current_db.append(category)
+    return json.dumps(current_db)
+
+def add_new_to_expense_category(g, db, category):
+    current_db = db.execute("SELECT expense_category FROM user WHERE user_id = ?", (g.user["user_id"],)).fetchone()["expense_category"]
+    current_db = json.loads(current_db)
+    current_db.append(category)
+    return json.dumps(current_db)
