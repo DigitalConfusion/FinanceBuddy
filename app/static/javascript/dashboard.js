@@ -43,23 +43,21 @@ $(document).ready(function () {
 });
 
 (() => {
-  const selectElem = document.getElementById('income_category');
-  selectElem.addEventListener('change', evt => {
-    if (selectElem.value == "Custom Category"){
+  const selectElem = document.getElementById("income_category");
+  selectElem.addEventListener("change", (evt) => {
+    if (selectElem.value == "Custom Category") {
       document.getElementById("custom_category").style.display = "flex";
-    }
-    else {
+    } else {
       document.getElementById("custom_category").style.display = "none";
     }
   });
 })();
 (() => {
-  const selectElem = document.getElementById('expense_category');
-  selectElem.addEventListener('change', evt => {
-    if (selectElem.value == "Custom Category"){
+  const selectElem = document.getElementById("expense_category");
+  selectElem.addEventListener("change", (evt) => {
+    if (selectElem.value == "Custom Category") {
       document.getElementById("custom_category2").style.display = "flex";
-    }
-    else {
+    } else {
       document.getElementById("custom_category2").style.display = "none";
     }
   });

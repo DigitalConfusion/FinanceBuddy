@@ -124,17 +124,30 @@
 <div class="finance-widgets-container">
     <div class="widget-container">
         <div class="balance-history-widget">
-            <div class="balance-history-range-selector-container">
-                <button class="range-selector-button">1 Week</button>
-                <button class="range-selector-button">1 Month</button>
-                <button class="range-selector-button">3 Months</button>
-                <button class="range-selector-button">1 Year</button>
+            <div class="btn-group" role="group">
+                <input type="radio" class="btn-check" name="timeframe_selector" id="week_1" autocomplete="off" onclick="updateCharts()">
+                <label class="btn btn-outline-primary" for="week_1">1 Week</label>
+              
+                <input type="radio" class="btn-check" name="timeframe_selector" id="month_1" autocomplete="off" onclick="updateCharts()" checked>
+                <label class="btn btn-outline-primary" for="month_1">1 Month</label>
+              
+                <input type="radio" class="btn-check" name="timeframe_selector" id="month_3" autocomplete="off" onclick="updateCharts()">
+                <label class="btn btn-outline-primary" for="month_3">3 Months</label>
+
+                <input type="radio" class="btn-check" name="timeframe_selector" id="year_1" autocomplete="off" onclick="updateCharts()">
+                <label class="btn btn-outline-primary" for="year_1">1 Year</label>
             </div>
             <div>
-                <h4>Income</h4>
+                <h4>Balance</h4>
                 <div id="balance_history_graph" class="balance-history-graph"></div>
-                <h4>Expenses</h4>
-                <div id="balance_history_graph2" class="balance-history-graph"></div>
+                <div class="btn-group" role="group">
+                    <input type="radio" class="btn-check" name="type_selector" id="income_radio" autocomplete="off" onclick="updateCharts()" checked>
+                    <label class="btn btn-outline-primary" for="income_radio">Income</label>
+                  
+                    <input type="radio" class="btn-check" name="type_selector" id="expense_radio" autocomplete="off" onclick="updateCharts()">
+                    <label class="btn btn-outline-primary" for="expense_radio">Expense</label>
+                </div>
+                <div id="income_expense_history_graph" class="balance-history-graph"></div>
             </div>
         </div>
         

@@ -3,6 +3,7 @@ from flask import Blueprint, flash, g, redirect, render_template, request, sessi
 from werkzeug.exceptions import abort
 import time
 import json
+from datetime import date, datetime
 
 from app.forms import *
 from app.auth import login_required
@@ -119,3 +120,36 @@ def api_get_category(type):
         category = db.execute("SELECT expense_category FROM user WHERE user_id = ?",
                               (g.user["user_id"],)).fetchone()["expense_category"]
     return jsonify(category)
+
+
+@bp.route("/api/graphdata/<timeframe>/<timeframe_amount>", methods=["GET", "POST"])
+def api_get_graph_data(timeframe, timeframe_amount):
+    timeframe = str(timeframe.lower())
+    timeframe_amount = int(timeframe_amount)
+    db = get_db()
+    data = {}
+    income_data = []
+    expense_data = []
+
+    unix_time_amount = {"week": 604800,
+                        "month": 2629743,
+                        "year": 31556926}
+
+    current_date = date.today()
+    current_date_timestamp = int(datetime(current_date.year, current_date.month, current_date.day).timestamp())
+    history_date_timestamp = current_date_timestamp - (unix_time_amount[timeframe] * timeframe_amount)
+
+    db_income_data = db.execute(
+        "SELECT amount, category, date FROM income WHERE user_id = ? AND date > ? ORDER BY date DESC", (g.user["user_id"], history_date_timestamp)).fetchall()
+    db_expense_data = db.execute(
+        "SELECT amount, category, date FROM expense WHERE user_id = ? AND date > ? ORDER BY date DESC", (g.user["user_id"], history_date_timestamp)).fetchall()
+    
+    for row in db_income_data:
+        income_data.append([row["amount"], row["date"], row["category"]])
+    for row in db_expense_data:
+        expense_data.append([row["amount"], row["date"], row["category"]])
+        
+    data["income"] = income_data
+    data["expense"] = expense_data
+    
+    return jsonify(data)
