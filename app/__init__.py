@@ -1,43 +1,43 @@
+# Importē bibliotēkas
 import os
-
 from flask import Flask, redirect, url_for
 from flask_bootstrap import Bootstrap
 
+# Importē nepieciešamos python moduļu failus
+from . import auth, dashboard, db
 
-def createApp(test_config=None):
+# Funkcija, kas izveido Flask objektu un nokonfigurē visu nepieciešamo
+def create_app():
     app = Flask(__name__, instance_relative_config=True)
     bootstrap = Bootstrap(app)
 
     app.static_folder = "static"
+    # Datubāzes iestatījumi
     app.config.from_mapping(
         SECRET_KEY='jSoNxYNvHIRBsBTp7tBeTMsVd6XWIE8Y',
         DATABASE=os.path.join(app.instance_path, 'financebuddy.sqlite'),
     )
-
-    if test_config is None:
-        # load the instance config, if it exists, when not testing
-        app.config.from_pyfile('config.py', silent=True)
-    else:
-        # load the test config if passed in
-        app.config.from_mapping(test_config)
-
+    # Izveido nepieciešamo failu uzbūves struktūru
     try:
         os.makedirs(app.instance_path)
     except OSError:
         pass
-
-    from . import auth, dashboard
+    
+    # Flask applikācijai piesaista attiecīgos blueprints,
+    # ko izmanto priekš individuālo lapu identifikācijas un kopīgām funkcijām    
     app.register_blueprint(auth.bp)
     app.register_blueprint(dashboard.bp)
     
-    from . import db
+    # Izveido datubāzi
     db.init_app(app)
 
+    # Piesaista default saiti login lapai
     @app.route("/")
     def index():
         return redirect(url_for("auth.login"))
     
+    # Atgriež Flask objektu
     return app
 
-
-app = createApp()
+# App mainīgais ir Flask applikācijas objekts
+app = create_app()
