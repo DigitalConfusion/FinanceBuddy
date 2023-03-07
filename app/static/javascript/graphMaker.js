@@ -2,7 +2,7 @@
 google.charts.load("current", { packages: ["corechart"] });
 
 // Set a callback to run when the Google Visualization API is loaded.
-google.charts.setOnLoadCallback(drawChart);
+google.charts.setOnLoadCallback(draw_line_chart);
 
 function get_graph_data(timeframe, timeframe_amount) {
   return new Promise((resolve) => {
@@ -12,13 +12,12 @@ function get_graph_data(timeframe, timeframe_amount) {
   });
 }
 
-async function drawChart() {
+async function draw_line_chart() {
   var timeframe, timeframe_amount;
   radio_data = document.querySelector('input[name="timeframe_selector"]:checked').id.split("_");
   timeframe = radio_data[0]
   timeframe_amount = radio_data[1]
   type = document.querySelector('input[name="type_selector"]:checked').id.split("_")[0].toLowerCase();
-  console.log(timeframe, timeframe_amount, type)
   const graph_data = await get_graph_data(timeframe, timeframe_amount);
 
   var income_data = new google.visualization.DataTable();
@@ -63,6 +62,6 @@ async function drawChart() {
   }
 }
 
-function updateCharts() {
-  drawChart()
+function update_line_charts() {
+  draw_line_chart()
 }

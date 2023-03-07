@@ -104,7 +104,7 @@ def api_get_finance_data(datatype, count):
             "SELECT amount, category, description FROM expense WHERE user_id = ? ORDER BY date DESC", (g.user["user_id"],)).fetchmany(count)
 
     for i, row in enumerate(db_data[:count]):
-        data[str(i)] = [row[0], row[1], row[2]]
+        data[str(i)] = [row[0], row[1], row[2], row[3]]
     return jsonify(data)
 
 

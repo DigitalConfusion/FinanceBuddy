@@ -52,6 +52,7 @@ $(document).ready(function () {
     }
   });
 })();
+
 (() => {
   const selectElem = document.getElementById("expense_category");
   selectElem.addEventListener("change", (evt) => {

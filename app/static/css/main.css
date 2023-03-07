@@ -300,13 +300,6 @@
     border-radius: 2vh;
     padding: 1%;
 }
-.finance-planner-widget{
-    width: 100%;
-    height: 100%;
-    background-color: white;
-    border-radius: 2vh;
-    
-}
 .history-widget-bar{
     display: flex;
     align-items: center;
