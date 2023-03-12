@@ -19,5 +19,5 @@ Contributions to this project are welcome. To contribute, follow these steps:
 ## Credits
 Finance Buddy was created by Gundars Matīss Melderis as a school programming project.
 
-License
+## License
 This project is licensed under the MIT License.
