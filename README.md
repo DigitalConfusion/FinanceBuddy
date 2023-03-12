@@ -1,7 +1,7 @@
 # Finance Buddy
 Finance Buddy is a finance tracking app that helps you keep track of your income, expenses, and overall budget. With Finance Buddy, you can easily add income and expense data, view your total balance, income and expense graphs, and review your recent history. You can also select a specific time period to view detailed history data.
 
-##Technologies Used
+## Technologies Used
 * Python
 * Flask
 * HTML
