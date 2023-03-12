@@ -9,6 +9,10 @@
 <h1>Dashboard</h1>
 {% endblock %}
 
+{% block username %}
+{{ user_data["username"] }}
+{% endblock %}
+
 {% block content %}
 <div class="finance-data-container">
     <div class="amount-data-container">

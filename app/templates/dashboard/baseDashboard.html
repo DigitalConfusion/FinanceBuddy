@@ -1,3 +1,4 @@
+<!--Template html lapa, kura tiek papildināta ar attiecīgo dashboard/history html kodu-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,9 +24,9 @@
                     <i class="fa-solid fa-table-columns"></i>
                     Dashboard
                 </button>
-                <button class="sidebar-button" type="button" onclick="window.location.href='{{ url_for( 'dashboard.stats' ) }}';">
+                <button class="sidebar-button" type="button" onclick="window.location.href='{{ url_for( 'dashboard.history' ) }}';">
                     <i class="fa-solid fa-chart-column"></i>
-                    Statistics
+                    History
                 </button>
             </div>
         </div>
@@ -38,7 +39,8 @@
                 <div class="dropdown-container">
                     <button id="dropdown-button" class="btn btn-primary btn-lg dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="fa-solid fa-user" style="color:black"></i>
-                        Username
+                        {% block username %}
+                        {% endblock %}
                     </button>
                     <ul class="dropdown-menu">
                         <li>
@@ -61,6 +63,6 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
     <script src="../../static/javascript/graphMaker.js"></script>
     <script src="../../static/javascript/dashboard.js"></script>
-    <script src="../../static/javascript/statistics.js"></script>
+    <script src="../../static/javascript/history.js"></script>
 </body>
 </html>

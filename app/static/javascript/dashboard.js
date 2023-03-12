@@ -1,6 +1,6 @@
 // Kad dokuments ir ielādējies un gatavs reģidēšanai
 $(document).ready(function () {
-  // Funkcija kas nostrādā uz lapas ielādēšanās un izveido ienākumu/izdevumu vēsturi
+  // Funkcija kas nostrādā uz lapas ielādēšanos un izveido ienākumu/izdevumu vēsturi
   window.onload = function () {
     // Nosūta pieprasījumu uz serveri, lai kopā iegūtu pēdējos 15 ienākumus/izdevumus
     $.ajax({ url: "api/financedata/all/15" }).done(function (res) {

@@ -56,7 +56,7 @@ class IncomeForm(FlaskForm):
                                   RequiredIf('income_category', "Custom Category")])
     description = StringField("Description", validators=[])
     submit = SubmitField("Submit")
-    
+
     # Kad forma tiek ielādēta mājaslapā, tad tiek papildināti izvēles lauki ar iespējamām kategorijām
     def __init__(self, *args, **kwargs):
         super().__init__()
@@ -78,7 +78,7 @@ class ExpenseForm(FlaskForm):
                                    RequiredIf('expense_category', "Custom Category")])
     description = StringField("Description", validators=[])
     submit = SubmitField("Submit")
-    
+
     # Kad forma tiek ielādēta mājaslapā, tad tiek papildināti izvēles lauki ar iespējamām kategorijām
     def __init__(self, *args, **kwargs):
         super().__init__()

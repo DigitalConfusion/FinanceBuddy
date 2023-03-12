@@ -12,20 +12,21 @@ from app.db import get_db
 # Izveido blueprint ar ko tiks associēta attiecīgā lapa un tās funkcija
 bp = Blueprint("dashboard", __name__, url_prefix="/dashboard")
 
+
 # Šī funkcija piešķir funkcionalitāti /dashboard lapai, jeb dod iespēju reģistrēties
 @bp.route("/", methods=["GET", "POST"])
 # Pārbauda vai lietotājs ir pieslēdzies, lai piekļūtai šai lapai
 @login_required
 def dashboard():
-    # Izveido formas, kurās lietotājs varēs ievadīt un izvēlēties 
+    # Izveido formas, kurās lietotājs varēs ievadīt un izvēlēties
     # attiecīgos datus, un padod tos html lapai
     balanceForm = BalanceForm(request.form)
     incomeForm = IncomeForm(request.form)
     expenseForm = ExpenseForm(request.form)
-    
+
     # Pieslēdzas datubāzei
     db = get_db()
-    
+
     # Ja lapa nosūta ievadītos datus atpakaļ uz serveri, tie tiek pārbaudīti
     if request.method == "POST" and balanceForm.validate_on_submit():
         balance = balanceForm.balance.data
@@ -46,7 +47,7 @@ def dashboard():
             db.execute("UPDATE user SET income_category = ? WHERE user_id = ?",
                        (add_new_to_income_category(g, db, category), g.user["user_id"]))
         description = incomeForm.description.data
-        # No datubāzes iegūst lietotāja šobrīdējos bilances un kopējo ienākumu datus 
+        # No datubāzes iegūst lietotāja šobrīdējos bilances un kopējo ienākumu datus
         current_data = db.execute(
             "SELECT total_balance, total_income FROM user WHERE user_id = ?", (g.user["user_id"],)).fetchone()
         # Atjauno lietotāja balanci par attiecīgo ienākumu daudzumu
@@ -64,7 +65,7 @@ def dashboard():
     # Ja lapa nosūta ievadītos datus atpakaļ uz serveri, tie tiek pārbaudīti
     if request.method == "POST" and expenseForm.validate_on_submit():
         expense = float(expenseForm.expense.data)
-        # No datubāzes iegūst lietotāja šobrīdējos bilances un kopējos izdevumu datus 
+        # No datubāzes iegūst lietotāja šobrīdējos bilances un kopējos izdevumu datus
         current_data = db.execute(
             "SELECT total_balance, total_expense FROM user WHERE user_id = ?", (g.user["user_id"],)).fetchone()
         category = expenseForm.expense_category.data
@@ -93,11 +94,13 @@ def dashboard():
 
     return render_template("dashboard/dashboard.html", user_data=g.user, balanceForm=balanceForm, incomeForm=incomeForm, expenseForm=expenseForm)
 
-# Šī funkcija piešķir tikai atgiriež /statistics lapu, jo funkcionalitāte tajā tiek
+
+# Šī funkcija piešķir tikai atgiriež /history lapu, jo funkcionalitāte tajā tiek
 # nodrošināta izmantojot JavaScript un citas funkcijas
-@bp.route("/statistics", methods=["GET"])
-def stats():
-    return render_template("dashboard/statistics.html")
+@bp.route("/history", methods=["GET"])
+def history():
+    return render_template("dashboard/history.html")
+
 
 # Šī ir api funkcija, ko izmanto, dashboard lapa, lai iegūtu lietotāja finanšu datus
 # lai izveidotu ienākumu un izdevumu vēsturi
@@ -142,6 +145,7 @@ def api_get_finance_data(datatype, count):
     # Atgriež datus JSON formātā
     return jsonify(data)
 
+
 # Šī ir api funkcija, ko izmanto, dashboard lapa, lai atgriztu lietotāja finanšu datus
 # lai izveidotu ienākumu un izdevumu vēsturi
 @bp.route("/api/category/<type>", methods=["GET", "POST"])
@@ -182,23 +186,25 @@ def api_get_graph_data(timeframe, timeframe_amount):
 
     # Iegūst nepieciešamo laika posmu datiem, ko vajag attēlot grafikā
     current_date = date.today()
-    current_date_timestamp = int(datetime(current_date.year, current_date.month, current_date.day).timestamp())
-    history_date_timestamp = current_date_timestamp - (unix_time_amount[timeframe] * timeframe_amount)
+    current_date_timestamp = int(
+        datetime(current_date.year, current_date.month, current_date.day).timestamp())
+    history_date_timestamp = current_date_timestamp - \
+        (unix_time_amount[timeframe] * timeframe_amount)
 
     # Iegūst datus no datubāzes
     db_income_data = db.execute(
         "SELECT amount, category, date FROM income WHERE user_id = ? AND date > ? ORDER BY date DESC", (g.user["user_id"], history_date_timestamp)).fetchall()
     db_expense_data = db.execute(
         "SELECT amount, category, date FROM expense WHERE user_id = ? AND date > ? ORDER BY date DESC", (g.user["user_id"], history_date_timestamp)).fetchall()
-    
+
     # Ievieto iegūtos datus sarakstos
     for row in db_income_data:
         income_data.append([row["amount"], row["date"], row["category"]])
     for row in db_expense_data:
         expense_data.append([row["amount"], row["date"], row["category"]])
-        
+
     # Izveido dictionary ar ienākumu un izdevumu datiem, lai atgrieztu visus datus ar JSON
     data["income"] = income_data
     data["expense"] = expense_data
-    
+
     return jsonify(data)

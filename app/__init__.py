@@ -1,15 +1,16 @@
 # Importē bibliotēkas
 import os
 from flask import Flask, redirect, url_for
-from flask_bootstrap import Bootstrap
+# from flask_bootstrap import Bootstrap
 
 # Importē nepieciešamos python moduļu failus
 from . import auth, dashboard, db
 
+
 # Funkcija, kas izveido Flask objektu un nokonfigurē visu nepieciešamo
 def create_app():
     app = Flask(__name__, instance_relative_config=True)
-    bootstrap = Bootstrap(app)
+    # bootstrap = Bootstrap(app)
 
     app.static_folder = "static"
     # Datubāzes iestatījumi
@@ -22,12 +23,12 @@ def create_app():
         os.makedirs(app.instance_path)
     except OSError:
         pass
-    
+
     # Flask applikācijai piesaista attiecīgos blueprints,
-    # ko izmanto priekš individuālo lapu identifikācijas un kopīgām funkcijām    
+    # ko izmanto priekš individuālo lapu identifikācijas un kopīgām funkcijām
     app.register_blueprint(auth.bp)
     app.register_blueprint(dashboard.bp)
-    
+
     # Izveido datubāzi
     db.init_app(app)
 
@@ -35,9 +36,10 @@ def create_app():
     @app.route("/")
     def index():
         return redirect(url_for("auth.login"))
-    
+
     # Atgriež Flask objektu
     return app
+
 
 # App mainīgais ir Flask applikācijas objekts
 app = create_app()
